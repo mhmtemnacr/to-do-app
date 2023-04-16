@@ -16,6 +16,7 @@ body {
 .App {
   padding: 1rem;
   max-width: 50%;
+  min-width: 685px;
   margin: 0 auto;
   text-align: center;
   background: #333;
@@ -61,6 +62,13 @@ input:focus {
   outline: none;
 }
 
+.edit-input {
+  width: 330px;
+  padding: 0.5em;
+  margin: 0;
+  background: #3d3c3b;
+}
+
 button {
   width: 140px;
   padding: 0.8em;
@@ -83,6 +91,13 @@ button {
   border-left: none;
 }
 
+.edit-button {
+  width: 60px;
+  color: #d3d7f0;
+  border-right: none;
+  font-size: 1em;
+}
+
 .delete-button {
   color: #fe6a6a;
 }
@@ -95,13 +110,17 @@ ul {
 
 li {
   width: 450px;
-  padding: 0.85em;
+  padding:0.85em;
   text-align: left;
   margin-bottom: 0.5rem;
   background: #494847;
   letter-spacing: 0.02rem;
-  transition: all 0.3s ease-out;
+  /*transition: all 0.3s ease-in-out;*/
   border-left: 5px solid #6e7bcc;
+}
+
+li.edit {
+  padding: 0.3em;
 }
 
 li:last-child {
