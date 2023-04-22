@@ -115,8 +115,10 @@ li {
   margin-bottom: 0.5rem;
   background: #494847;
   letter-spacing: 0.02rem;
+  margin-right: 0.5rem;
   /*transition: all 0.3s ease-in-out;*/
   border-left: 5px solid #6e7bcc;
+  overflow: hidden;
 }
 
 li.edit {

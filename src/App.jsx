@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import './App.css'
 import TodoInput from "./TodoInput.jsx";
 import TodoList from "./TodoList.jsx";
@@ -8,6 +8,16 @@ function App() {
     const [toDos, setToDos] = useState([])
     const [editID, setEditID] = useState(-1)
 
+    useEffect(() => {
+        console.log('Function component mounted!');
+        loadToDos()
+        console.log('Loaded to-dos!');
+    }, []);
+
+    useEffect(() => {
+        saveToDos()
+    }, [toDos]);
+
     const addToDo = () => {
         if (toDo !== "") {
             setToDos([...toDos, toDo]);
@@ -16,14 +26,16 @@ function App() {
     };
 
     const deleteToDo = (id) => {
-        const newToDos = toDos.filter((toDo, i) => {
-             return i !== id;
-        });
-        // const newToDos = toDos.splice(id, 1)
-        setToDos(newToDos);
 
-        if (editID >= id) {
+        const newToDos = [...toDos]
+        newToDos.splice(id, 1)
+        setToDos(newToDos)
+
+        if (editID > id) {
             setEditID(editID - 1)
+        }
+        else if (editID === id) {
+            setEditID(-1)
         }
     }
 
@@ -31,9 +43,23 @@ function App() {
         setEditID(id)
     }
 
+    const saveToDos = () => {
+        localStorage.setItem("toDos", JSON.stringify(toDos))
+    }
+
+    const loadToDos = () => {
+        const storedArray = localStorage.getItem("toDos")
+        const parsedArray = JSON.parse(storedArray)
+
+        if (parsedArray.length > 0) {
+            setToDos(parsedArray)
+        }
+    }
+
     const handleEdited = (index, newText) => {
         toDos[index] = newText
         setEditID(-1)
+        saveToDos()
     }
 
     return (
